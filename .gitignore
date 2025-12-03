@@ -1,0 +1,29 @@
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+UserSettings/
+# Packages manager
+/Packages/packages-lock.json
+# Visual Studio
+.vscode/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+# Otros
+*.pidb.meta
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.ide
+*.sdf
+*.sln.DotSettings
