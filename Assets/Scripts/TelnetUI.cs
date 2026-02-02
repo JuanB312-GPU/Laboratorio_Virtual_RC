@@ -26,6 +26,7 @@ public class TelnetUI : MonoBehaviour
         telnetClient.OnDataReceived.AddListener(AppendOutput);
         inputField.onEndEdit.AddListener(OnInputEndEdit);
         inputField.ActivateInputField(); // dar foco al abrir
+            
     }
 
     void OnDisable()
@@ -34,21 +35,24 @@ public class TelnetUI : MonoBehaviour
         inputField.onEndEdit.RemoveListener(OnInputEndEdit);
     }
 
-    void OnInputEndEdit(string text)
-    {
-        // Si no hay teclado disponible (por ejemplo en algunos dispositivos), protegemos con null-check
-        var kb = Keyboard.current;
-        bool enterPressed = kb != null && (kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame);
+void OnInputEndEdit(string text)
+{
+    var kb = Keyboard.current;
+    bool enterPressed = kb != null &&
+        (kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame);
 
-        if (enterPressed)
-            {
-                SendCommand(text);
-            }
-        else
-            {
-                // Se disparó OnEndEdit por pérdida de foco: no enviamos
-            }
+    if (!enterPressed) return;
+
+    if (string.IsNullOrEmpty(text))
+    {
+        // ENTER vacío → nueva línea + prompt
+        SendCommand("\r");
     }
+    else
+    {
+        SendCommand(text + "\r");
+    }
+}
 
     string CleanTelnetText(string input)
     {
@@ -64,15 +68,22 @@ public class TelnetUI : MonoBehaviour
 
     // 3) Remover caracteres de control no imprimibles (0x00 - 0x1F) excepto \r(13), \n(10), \t(9)
     input = Regex.Replace(input, @"[\x00-\x08\x0B\x0C\x0E-\x1F]", string.Empty);
+    input = Regex.Replace(input, @"[\p{Cc}&&[^\n\t]]", string.Empty);
+    // 4) Normalizar saltos de línea Telnet (CRLF / CR / LF → LF)
+    input = input.Replace("\r\n", "\n");
+    input = input.Replace("\r", "\n");
 
+// 5) Colapsar múltiples saltos de línea en uno solo (opcional pero recomendado)
+input = Regex.Replace(input, @"\n{3,}", "\n\n");
     return input;
     }
 
    public void AppendOutput(string text)
     {
-    string clean = CleanTelnetText(text);
-    cliBuffer.AppendLine(clean);
-    outputText.text = cliBuffer.ToString();
+
+    cliBuffer.Append(text);
+string clean = CleanTelnetText(cliBuffer.ToString());
+outputText.text = clean;
 
     // Hacer scroll al final
     Canvas.ForceUpdateCanvases();
@@ -81,46 +92,44 @@ public class TelnetUI : MonoBehaviour
     }
 
     public void SendCommand(string rawCommand)
+{
+    bool isPureEnter = rawCommand == "\r" || rawCommand == "\n" || rawCommand == "\r\n";
+
+    string command;
+
+    if (isPureEnter) 
     {
-        if (string.IsNullOrWhiteSpace(rawCommand))
-        {
-            // Nada que enviar: mantener foco para seguir escribiendo
-            if (inputField != null) inputField.ActivateInputField();
-            return;
-        }
-
-        // Normalizar la linea (quitar saltos accidentales)
-        string command = rawCommand.TrimEnd('\r', '\n');
-
-        // Limitar tamaño del buffer para evitar memoria infinita
-        if (cliBuffer.Length > maxOutputChars)
-        {
-            cliBuffer.Remove(0, cliBuffer.Length - maxOutputChars);
-        }
-
-        // Volcar buffer al TextMeshPro
-        outputText.text = cliBuffer.ToString();
-
-        
-
-        // Enviar el comando por Telnet (TelnetClient añade el CRLF internamente)
-        try
-        {
-            telnetClient?.Send(command);
-        }
-        catch (System.Exception ex)
-        {
-            // En caso de error al intentar enviar, lo reflejamos en la UI
-            cliBuffer.AppendLine($"[Telnet] Error enviando: {ex.Message}");
-            outputText.text = cliBuffer.ToString();
-            
-        }
-
-        // Limpiar input y re-enfocar
-        inputField.text = "";
-        inputField.ActivateInputField();
+        // ENTER real → no tocar
+        command = "";
+    }
+    else
+    {
+        // Texto normal → limpiar saltos accidentales
+        command = rawCommand.TrimEnd('\r', '\n');
     }
 
+    // Limitar tamaño del buffer
+    if (cliBuffer.Length > maxOutputChars)
+    {
+        cliBuffer.Remove(0, cliBuffer.Length - maxOutputChars);
+    }
+
+    outputText.text = cliBuffer.ToString();
+
+    try
+    {
+        // IMPORTANTE: TelnetClient agregará CRLF
+        telnetClient?.Send(command);
+    }
+    catch (System.Exception ex)
+    {
+        cliBuffer.AppendLine($"[Telnet] Error enviando: {ex.Message}");
+        outputText.text = cliBuffer.ToString();
+    }
+
+    inputField.text = "";
+    inputField.ActivateInputField();
+}
     void Update()
     {
     if (!inputField.isFocused)

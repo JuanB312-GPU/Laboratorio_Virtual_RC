@@ -4,12 +4,12 @@ using System.Text;
 using System.Threading;
 using System.Collections.Concurrent;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.Events; 
 
 public class TelnetClient : MonoBehaviour
 {
     [Header("Conexión")]
-    public string host = "192.168.0.40"; // reemplaza por la IP de tu PC
+    public string host = "192.168.0.15"; // reemplaza por la IP de tu PC
     public int port = 5000;
 
     [Header("Reconnect")]
@@ -99,7 +99,7 @@ public class TelnetClient : MonoBehaviour
     {
         try
         {
-            if (client == null || !client.Connected) 
+            if (client == null || !client.Connected)
             {
                 EnqueueMain("[Telnet] No conectado.");
                 return;
@@ -110,8 +110,10 @@ public class TelnetClient : MonoBehaviour
         catch (Exception ex)
         {
             EnqueueMain($"[Telnet] Error enviando: {ex.Message}");
-        }
     }
+    }
+
+
 
     void SafeClose()
     {
