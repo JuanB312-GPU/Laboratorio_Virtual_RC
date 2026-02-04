@@ -1,0 +1,5 @@
+D:/ProjectCLI/.utmp/Debug/603h6826/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/ProjectCLI/.utmp/Debug/603h6826/arm64-v8a/CMakeFiles/rebuild_cache.dir
+D:/ProjectCLI/.utmp/Debug/603h6826/arm64-v8a/GameActivity/CMakeFiles/game.dir
+D:/ProjectCLI/.utmp/Debug/603h6826/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+D:/ProjectCLI/.utmp/Debug/603h6826/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
