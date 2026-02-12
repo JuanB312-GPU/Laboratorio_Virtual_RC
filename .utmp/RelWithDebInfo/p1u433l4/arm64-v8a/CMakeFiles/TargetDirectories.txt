@@ -1,0 +1,5 @@
+C:/Users/REALIDAD AUMENTADA/Downloads/Laboratorio_Virtual_RC-main (1)/Laboratorio_Virtual_RC-main/.utmp/RelWithDebInfo/p1u433l4/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/REALIDAD AUMENTADA/Downloads/Laboratorio_Virtual_RC-main (1)/Laboratorio_Virtual_RC-main/.utmp/RelWithDebInfo/p1u433l4/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/REALIDAD AUMENTADA/Downloads/Laboratorio_Virtual_RC-main (1)/Laboratorio_Virtual_RC-main/.utmp/RelWithDebInfo/p1u433l4/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/REALIDAD AUMENTADA/Downloads/Laboratorio_Virtual_RC-main (1)/Laboratorio_Virtual_RC-main/.utmp/RelWithDebInfo/p1u433l4/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/REALIDAD AUMENTADA/Downloads/Laboratorio_Virtual_RC-main (1)/Laboratorio_Virtual_RC-main/.utmp/RelWithDebInfo/p1u433l4/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir

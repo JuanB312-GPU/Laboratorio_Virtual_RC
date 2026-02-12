@@ -1,0 +1,2 @@
+C:\Users\REALIDAD AUMENTADA\Downloads\Laboratorio_Virtual_RC-main (1)\Laboratorio_Virtual_RC-main\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\REALIDAD AUMENTADA\Downloads\Laboratorio_Virtual_RC-main (1)\Laboratorio_Virtual_RC-main\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
