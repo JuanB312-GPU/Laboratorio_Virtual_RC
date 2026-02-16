@@ -4,7 +4,8 @@ using TMPro;
 public class ChangeColorController : MonoBehaviour
 {
     public TMP_Dropdown dropdown;
-    public TMP_Text targetText;
+    public TMP_Text CliText;
+    public TMP_Text InputText;
 
     void Start()
     {
@@ -17,19 +18,23 @@ public class ChangeColorController : MonoBehaviour
         switch (index)
         {
             case 0: // Naranja CLI
-                targetText.color = new Color(1f, 0.55f, 0f);
+                CliText.color = new Color(1f, 0.55f, 0f);
+                InputText.color = new Color(1f, 0.55f, 0f);
                 break;
 
             case 1: // Cyan
-                targetText.color = new Color(0f, 1f, 1f);
+                CliText.color = new Color(0f, 1f, 1f);
+                InputText.color = new Color(0f, 1f, 1f);
                 break;
 
             case 2: // Blanco
-                targetText.color = Color.white;
+                CliText.color = Color.white;
+                InputText.color = Color.white;
                 break;
 
             case 3: // Verde CLI
-                targetText.color = new Color(0f, 1f, 0.27f);
+                CliText.color = new Color(0f, 1f, 0.27f);
+                InputText.color = new Color(0f, 1f, 0.27f);
                 break;
         }
     }
