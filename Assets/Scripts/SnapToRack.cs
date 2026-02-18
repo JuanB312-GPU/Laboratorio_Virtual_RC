@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -67,15 +67,27 @@ public class SnapToRack : MonoBehaviour
 
     private void OnRelease(SelectExitEventArgs args)
     {
-        RackSlot closestSlot = GetClosestSlot();
-        if (closestSlot != null && !closestSlot.isOccupied)
+        if (isBeingGrabbed)
         {
-            SnapIntoSlot(closestSlot);
+            isBeingGrabbed = false;
+            RackSlot closestSlot = GetClosestSlot();
+            if (closestSlot != null && !closestSlot.isOccupied)
+            {
+                SnapIntoSlot(closestSlot);
+                return;
+            }
+            // Si no encaja en ninguna slot, deja físicas libres para que siga cayendo/volviendo
+            rb.isKinematic = false;
+            rb.useGravity = true;
         }
     }
 
+    private bool isBeingGrabbed = false;
+
     private void OnGrab(SelectEnterEventArgs args)
     {
+        isBeingGrabbed = true;
+
         if (snappedSlot != null)
         {
             snappedSlot.isOccupied = false;
@@ -83,9 +95,10 @@ public class SnapToRack : MonoBehaviour
             snappedSlot = null;
         }
 
-        rb.isKinematic = false;
         transform.SetParent(null);
-        transform.rotation = originalRotation;
+
+        rb.isKinematic = false;
+        rb.useGravity = true;
     }
 
     private void SnapIntoSlot(RackSlot slot)
@@ -111,5 +124,8 @@ public class SnapToRack : MonoBehaviour
         snappedSlot = slot;
 
         rb.isKinematic = true;
+        rb.useGravity = false;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 }
