@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: efb5ab323cd8185459f3d4c78c4fad2d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ropeMesh: {instanceID: 0}
+  - starAnchorTemp: {instanceID: 0}
+  - firstSegment: {instanceID: 0}
+  - endAnchorTemp: {instanceID: 0}
+  - plugTemp: {instanceID: 0}
+  - startAnchorPoint: {instanceID: 0}
+  - segment: {fileID: 4721452859494924073, guid: 849875b46444f03428e4827a73935668, type: 3}
+  - segmentNoPhysics: {fileID: 4721452859494924073, guid: 2f6f00131ed85584dbbee855f7fc0bb5, type: 3}
+  - endAnchorPoint: {instanceID: 0}
+  - plugObjt: {instanceID: 0}
+  - mousePossHelper: {instanceID: 0}
+  - presetJoint: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
