@@ -12457,6 +12457,8 @@ GameObject:
   - component: {fileID: 1026524871}
   - component: {fileID: 1026524870}
   - component: {fileID: 1026524874}
+  - component: {fileID: 1026524876}
+  - component: {fileID: 1026524875}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -12567,6 +12569,40 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+--- !u!114 &1026524875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026524869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f217616079a9a74489a1ae3cd9178787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VoskSpeechToText
+  ModelPath: vosk-model-small-es-0.42.zip
+  VoiceProcessor: {fileID: 1026524876}
+  MaxAlternatives: 3
+  MaxRecordLength: 5
+  AutoStart: 1
+  KeyPhrases: []
+--- !u!114 &1026524876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026524869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf39116cc6db44d47b2eaf534e0f6682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VoiceProcessor
+  MicrophoneIndex: 0
+  _minimumSpeakingSampleValue: 0.05
+  _silenceTimer: 1
+  _autoDetect: 0
 --- !u!114 &1027376779 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1178791450436251564, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
@@ -13357,7 +13393,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085145255}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f95cfb476ae3fd44ea0f5c7f21199882, type: 3}
   m_Name: 
@@ -14499,8 +14535,8 @@ MonoBehaviour:
   linePoints: 10
   stiffness: 350
   damping: 15
-  ropeLength: 0.9
-  ropeWidth: 0.03
+  ropeLength: 1.5
+  ropeWidth: 0.1
   midPointWeight: 1
   midPointPosition: 0.5
 --- !u!120 &1201935365
@@ -14553,15 +14589,15 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: -5.5856004, y: 0.1437, z: -8.3001}
-  - {x: -5.5886803, y: 0.08772108, z: -8.241281}
-  - {x: -5.5917606, y: 0.044181917, z: -8.182461}
-  - {x: -5.59484, y: 0.013082504, z: -8.12364}
-  - {x: -5.59792, y: -0.0055771302, z: -8.06482}
-  - {x: -5.6010003, y: -0.011797011, z: -8.0060005}
-  - {x: -5.60408, y: -0.0055771247, z: -7.9471803}
-  - {x: -5.60716, y: 0.013082512, z: -7.8883605}
-  - {x: -5.610241, y: 0.04418192, z: -7.8295403}
-  - {x: -5.6133204, y: 0.087721065, z: -7.77072}
+  - {x: -5.5886803, y: -0.02027894, z: -8.241281}
+  - {x: -5.5917606, y: -0.14781809, z: -8.182461}
+  - {x: -5.59484, y: -0.23891748, z: -8.12364}
+  - {x: -5.59792, y: -0.29357713, z: -8.06482}
+  - {x: -5.6010003, y: -0.31179702, z: -8.0060005}
+  - {x: -5.60408, y: -0.29357716, z: -7.9471803}
+  - {x: -5.60716, y: -0.23891753, z: -7.8883605}
+  - {x: -5.610241, y: -0.14781809, z: -7.8295403}
+  - {x: -5.6133204, y: -0.020278975, z: -7.77072}
   - {x: -5.6164002, y: 0.1437, z: -7.7119}
   m_Parameters:
     serializedVersion: 3
@@ -14571,7 +14607,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.03
+        value: 0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -14580,7 +14616,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.03
+        value: 0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
