@@ -30,7 +30,6 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4455438662752596672}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -48,6 +47,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 2
@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 7566063986779765728}
   - component: {fileID: 6843260260195551652}
   - component: {fileID: 2428494541859028798}
+  - component: {fileID: 3646199657637016248}
   m_Layer: 5
   m_Name: TouchPadButton
   m_TagString: Untagged
@@ -169,7 +170,6 @@ RectTransform:
   - {fileID: 7991839960969920021}
   - {fileID: 4550097850330393526}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -227,7 +227,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2516641621768468710}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3646199657637016248}
+        m_TargetAssemblyTypeName: ButtonValueSetter, Assembly-CSharp
+        m_MethodName: SendKey
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7566063986779765728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +288,7 @@ MonoBehaviour:
   m_ApplyIfChildIsTarget: 1
   m_ClampToMaxDistance: 1
   m_MaxDistance: 20
+  m_PokeFilter: {fileID: 0}
 --- !u!114 &2428494541859028798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +386,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &3646199657637016248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455438662752596673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c99a17d599529044ad3642a467704ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonValueSetter
 --- !u!1 &4455438663099779003
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +429,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7991839960969920021}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -486,7 +510,6 @@ RectTransform:
   m_Children:
   - {fileID: 4455438663099779002}
   m_Father: {fileID: 4455438662752596672}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

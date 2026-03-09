@@ -15,6 +15,8 @@ public class TelnetUI : MonoBehaviour
     public TMP_InputField inputField;
     public ScrollRect scrollRect;
     private StringBuilder cliBuffer = new StringBuilder();
+    public static System.Action<bool> OnCapsChanged;
+    private bool capsActive = false;
 
     void Start()
     {
@@ -136,4 +138,59 @@ outputText.text = clean;
         inputField.ActivateInputField();
     }
 
+    public void VirtualKeyPress(string key)
+    {
+        if (string.IsNullOrEmpty(key)) return;
+
+        switch (key.ToLower())
+        {
+            case "caps":
+                capsActive = !capsActive;
+                OnCapsChanged?.Invoke(capsActive);
+                return;
+
+            case "entrar":
+                if (string.IsNullOrEmpty(inputField.text))
+                    SendCommand("\r");
+                else
+                    SendCommand(inputField.text + "\r");
+                return;
+
+            case "retroceso":
+                if (inputField.text.Length > 0)
+                    inputField.text = inputField.text.Substring(0, inputField.text.Length - 1);
+                break;
+
+            case "espacio":
+                inputField.text += " ";
+                break;
+
+            default:
+                string value = capsActive ? ApplyCaps(key) : key;
+                inputField.text += value;
+                break;
+        }
+
+        inputField.caretPosition = inputField.text.Length;
+    }
+
+    static string ApplyCaps(string value)
+    {
+        switch (value)
+        {
+            case "1": return "!";
+            case "2": return "@";
+            case "3": return "#";
+            case "4": return "$";
+            case "5": return "%";
+            case "6": return "^";
+            case "7": return "&";
+            case "8": return "*";
+            case "9": return "(";
+            case "0": return ")";
+        }
+            return value.ToUpper();
+        
+
+    }
 }
