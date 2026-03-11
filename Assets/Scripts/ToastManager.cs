@@ -10,6 +10,14 @@ public class ToastManager : MonoBehaviour
     public GameObject toastPanel;
     public Text toastText; // or TextMeshProUGUI if using TMP
 
+    public Toggle miToggleA;
+    public Toggle miToggleB;
+    public Toggle miToggleC;
+
+    public Toggle miToggleM;
+    public Toggle miToggleRX;
+    public Toggle miToggleRY;
+
     [Header("Settings")]
     public float duration = 3f;
     public float fadeSpeed = 1f;
@@ -26,7 +34,36 @@ public class ToastManager : MonoBehaviour
     public void ShowToast(string message)
     {
         StopAllCoroutines();
-        toastText.text = message;
+        string completeMessage = "";
+
+        switch(message)
+        {
+            case "A":
+                miToggleA.isOn = true;
+                completeMessage = "Se ha pasado por el marcador A";
+                break;
+            case "B":
+                miToggleB.isOn = true;
+                completeMessage = "Se ha pasado por el marcador B";
+                break;
+            case "C":
+                miToggleC.isOn = true;
+                completeMessage = "Se ha pasado por el marcador C";
+                break;
+            case "Movimiento":
+                miToggleM.isOn = true;
+                completeMessage = "Se ha realizado la acción de movimiento";
+                break;
+            case "Rotación en X":
+                miToggleRX.isOn = true;
+                completeMessage = "Se ha realizado la acción de rotación en X";
+                break;
+            case "Rotación en Y":
+                miToggleRY.isOn = true;
+                completeMessage = "Se ha realizado la acción de rotación en Y";
+                break;
+        }
+        toastText.text = completeMessage;
         toastPanel.SetActive(true);
         StartCoroutine(AnimateToast());
     }

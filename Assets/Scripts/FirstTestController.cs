@@ -16,7 +16,7 @@ public class FirstTestController : MonoBehaviour
 
     public void HandleStepMarker(string markerName)
     {
-        ToastManager.Instance.ShowToast("Pasaste por: " + markerName);
+        ToastManager.Instance.ShowToast(markerName);
         // Aquí va tu acción: sumar puntos, abrir puerta, etc.
     }
 }
