@@ -111,6 +111,7 @@ public class SnapToRack : MonoBehaviour
         if (slotCollider != null)
         {
             transform.position = slotCollider.bounds.center;
+            
         }
         else
         {
@@ -122,6 +123,7 @@ public class SnapToRack : MonoBehaviour
         slot.isOccupied = true;
         slot.Highlight(true);
         snappedSlot = slot;
+        ToastManager.Instance.ShowToast(gameObject.name + " Enter into slot: " + slot.name);
 
         rb.isKinematic = true;
         rb.useGravity = false;
