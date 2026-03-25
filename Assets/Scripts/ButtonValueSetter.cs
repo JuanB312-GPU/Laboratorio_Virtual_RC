@@ -62,7 +62,7 @@ public class ButtonValueSetter : MonoBehaviour
             case "0": return ")";
         }
 
-        if (value == "Entrar" || value == "Retroceso" || value == "Caps")
+        if (value == "Entrar" || value == "Retroceso" || value == "Caps" || value == "←" || value == "→")
         {
             return value;
         }

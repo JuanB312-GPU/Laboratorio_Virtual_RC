@@ -37,24 +37,24 @@ public class TelnetUI : MonoBehaviour
         inputField.onEndEdit.RemoveListener(OnInputEndEdit);
     }
 
-void OnInputEndEdit(string text)
-{
-    var kb = Keyboard.current;
-    bool enterPressed = kb != null &&
-        (kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame);
-
-    if (!enterPressed) return;
-
-    if (string.IsNullOrEmpty(text))
+    void OnInputEndEdit(string text)
     {
-        // ENTER vacío → nueva línea + prompt
-        SendCommand("\r");
+        var kb = Keyboard.current;
+        bool enterPressed = kb != null &&
+            (kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame);
+
+        if (!enterPressed) return;
+
+        if (string.IsNullOrEmpty(text))
+        {
+            // ENTER vacío → nueva línea + prompt
+            SendCommand("\r");
+        }
+        else
+        {
+            SendCommand(text + "\r");
+        }
     }
-    else
-    {
-        SendCommand(text + "\r");
-    }
-}
 
     string CleanTelnetText(string input)
     {
@@ -164,6 +164,16 @@ outputText.text = clean;
             case "espacio":
                 inputField.text += " ";
                 break;
+            
+            case "←":
+                if (inputField.caretPosition > 0)
+                    inputField.caretPosition--;
+                return;
+
+            case "→":
+                if (inputField.caretPosition < inputField.text.Length)
+                    inputField.caretPosition++;
+                return;
 
             default:
                 string value = capsActive ? ApplyCaps(key) : key;
@@ -192,5 +202,10 @@ outputText.text = clean;
             return value.ToUpper();
         
 
+    }
+
+    public void ClearOutput()
+    {
+        cliBuffer.Clear();
     }
 }

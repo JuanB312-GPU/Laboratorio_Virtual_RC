@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.IO;
 
 public class ToastManager : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class ToastManager : MonoBehaviour
     public GameObject toastPanel;
     public Text toastText; // or TextMeshProUGUI if using TMP
 
+    [Header("Sound")]
+    public AudioSource audioSource;
+    public AudioClip successSound;
+    public AudioClip finalSound;
     public Toggle miToggleA;
     public Toggle miToggleB;
     public Toggle miToggleC;
@@ -24,6 +29,54 @@ public class ToastManager : MonoBehaviour
 
     private CanvasGroup canvasGroup;
 
+    [Header("Timer")]
+    private float timerValue = 0f;
+    private bool timerRunning = false;
+
+    void Update()
+    {
+        if (timerRunning)
+            timerValue += Time.deltaTime;
+    }
+
+    private void CheckTimer(int caseValue)
+    {
+        bool timerEnable = false;
+        switch (caseValue)
+        {
+            case 0:
+                timerEnable = miToggleA.isOn && miToggleB.isOn && miToggleC.isOn;
+                
+                if (!timerRunning && (miToggleA.isOn || miToggleB.isOn || miToggleC.isOn))
+                {
+                    // Arranca cuando se activa el primero
+                    timerValue = 0f;
+                    timerRunning = true;
+                    Debug.Log("Timer started");
+                }
+                break;
+            case 1:
+                timerEnable = miToggleM.isOn && miToggleRX.isOn && miToggleRY.isOn;
+
+                if (!timerRunning && (miToggleM.isOn || miToggleRX.isOn || miToggleRY.isOn))
+                {
+                    // Arranca cuando se activa el primero
+                    timerValue = 0f;
+                    timerRunning = true;
+                    Debug.Log("Timer started");
+                }
+                break;
+        }
+
+        if (timerRunning && timerEnable)
+        {
+            // Se detiene cuando los tres est谩n activos
+            timerRunning = false;
+            Debug.Log("Timer stopped: " + timerValue.ToString("F2") + " seconds");
+            SaveTimerToFile(timerValue, caseValue);
+        }
+    }
+
     void Awake()
     {
         Instance = this;
@@ -35,36 +88,61 @@ public class ToastManager : MonoBehaviour
     {
         StopAllCoroutines();
         string completeMessage = "";
+        bool enable1 = false;
+        bool enable2 = false;
 
         switch(message)
         {
             case "A":
                 miToggleA.isOn = true;
                 completeMessage = "Se ha pasado por el marcador A";
+                CheckTimer(0);
                 break;
             case "B":
                 miToggleB.isOn = true;
                 completeMessage = "Se ha pasado por el marcador B";
+                CheckTimer(0);
                 break;
             case "C":
                 miToggleC.isOn = true;
                 completeMessage = "Se ha pasado por el marcador C";
+                CheckTimer(0);
                 break;
             case "Movimiento":
                 miToggleM.isOn = true;
-                completeMessage = "Se ha realizado la acci髇 de movimiento";
+                completeMessage = "Se ha realizado la accin de movimiento";
+                CheckTimer(1);
                 break;
-            case "Rotaci髇 en X":
+            case "Rotaci锟絥 en X":
                 miToggleRX.isOn = true;
-                completeMessage = "Se ha realizado la acci髇 de rotaci髇 en X";
+                completeMessage = "Se ha realizado la acci锟絥 de rotaci锟絥 en X";
+                CheckTimer(1);
                 break;
-            case "Rotaci髇 en Y":
+            case "Rotacin en Y":
                 miToggleRY.isOn = true;
-                completeMessage = "Se ha realizado la acci髇 de rotaci髇 en Y";
+                completeMessage = "Se ha realizado la accin de rotacin en Y";
+                CheckTimer(1);
                 break;
         }
+
+        // L贸gica de sonido para toggles de movimiento y rotaci贸n
+        if (message == "Movimiento" || message == "Rotaci贸n en X" || message == "Rotaci贸n en Y")
+        {
+            enable1 = miToggleM.isOn && miToggleRX.isOn && miToggleRY.isOn;
+            audioSource.clip = enable1 ? finalSound : successSound;
+        }
+
+        // L贸gica de sonido para toggles de puntos de control
+        if (message == "A" || message == "B" || message == "C")
+        {
+            enable2 = miToggleA.isOn && miToggleB.isOn && miToggleC.isOn;
+            audioSource.clip = enable2 ? finalSound : successSound;
+        }
+
+        // Se lanza el toast, y se activa el audio
         toastText.text = completeMessage;
         toastPanel.SetActive(true);
+        audioSource.Play();
         StartCoroutine(AnimateToast());
     }
 
@@ -89,5 +167,20 @@ public class ToastManager : MonoBehaviour
         }
 
         toastPanel.SetActive(false);
+    }
+
+    // Funci贸n para guardar los tiempos en un archivo de texto
+    void SaveTimerToFile(float timeValue, int caseValue)
+    {
+        string path = Application.persistentDataPath + "/tiempos.txt";
+
+        string tipo = caseValue == 0 ? "Marcadores (A-B-C)" : "Movimientos (M-RX-RY)";
+        string line = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +
+                    " | " + tipo +
+                    " | Tiempo: " + timeValue.ToString("F2") + " segundos";
+
+        File.AppendAllText(path, line + "\n");
+
+        Debug.Log("Guardado en: " + path);
     }
 }

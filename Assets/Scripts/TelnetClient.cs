@@ -5,18 +5,25 @@ using System.Threading;
 using System.Collections.Concurrent;
 using UnityEngine;
 using UnityEngine.Events; 
+using TMPro;
 
 public class TelnetClient : MonoBehaviour
 {
     [Header("Conexión")]
-    public string host = "192.168.0.15"; // reemplaza por la IP de tu PC
+    public string host = "127.0.0.1"; // reemplaza por la IP de tu PC
     public int port = 5000;
+
+    public TMP_Dropdown portDropdown;
+
+    ConcurrentQueue<UnityEvent> eventQueue = new ConcurrentQueue<UnityEvent>();
 
     [Header("Reconnect")]
     public bool autoReconnect = true;
     public float reconnectDelay = 3f;
 
-    public UnityEvent<string> OnDataReceived; // inspector: asigna función para mostrar texto
+    public UnityEvent<string> OnDataReceived;
+    
+    public UnityEvent OnDeviceChanged; // inspector: asigna función para mostrar texto
     public UnityEvent OnConnected;
     public UnityEvent OnDisconnected;
 
@@ -31,6 +38,7 @@ public class TelnetClient : MonoBehaviour
     void Start()
     {
         // Start connection attempt
+        portDropdown.onValueChanged.AddListener(OnPortChanged);
         Connect();
     }
 
@@ -40,6 +48,38 @@ public class TelnetClient : MonoBehaviour
         running = true;
         readThread = new Thread(ConnectionLoop) { IsBackground = true };
         readThread.Start();
+    }
+
+    public void ChangePort(int newPort)
+    {
+        port = newPort;
+
+        // Solo forzar reconexión
+        SafeClose();
+    }
+
+    void OnPortChanged(int index)
+    {
+        string selectedText = portDropdown.options[index].text;
+        switch (selectedText)
+        {
+            case "Router-1":
+                selectedText = "5000";
+                break;
+            case "PC1":
+                selectedText = "5003";
+                break;
+            case "PC2":
+                selectedText = "5002";
+                break;
+            case "PC3":
+                selectedText = "5006";
+                break;
+            // Agrega más casos según tus opciones
+        }
+        int newPort = int.Parse(selectedText);
+
+        ChangePort(newPort);
     }
 
     void ConnectionLoop()
@@ -121,6 +161,7 @@ public class TelnetClient : MonoBehaviour
         try { client?.Close(); } catch { }
         client = null;
         stream = null;
+        EnqueueEvent(OnDeviceChanged);
     }
 
     void EnqueueMain(string msg)
@@ -130,24 +171,22 @@ public class TelnetClient : MonoBehaviour
 
     void EnqueueEvent(UnityEvent ev)
     {
-        if (ev != null) mainThreadQueue.Enqueue($"__EVENT__:{Guid.NewGuid()}:{ev.GetHashCode()}");
-        // We'll invoke events in Update by checking those markers
-        // (Simpler: call OnConnected/OnDisconnected directly via SynchronizationContext if needed)
+        if (ev != null)
+            eventQueue.Enqueue(ev);
     }
 
     void Update()
     {
+        // Procesar texto
         while (mainThreadQueue.TryDequeue(out string s))
         {
-            // eventos marcados
-            if (s.StartsWith("__EVENT__"))
-            {
-                // simplificado: invocar OnConnected/OnDisconnected directly - but we already enqueued messages to indicate state
-                continue;
-            }
-
-            // Evocar callback con el texto recibido
             OnDataReceived?.Invoke(s);
+        }
+
+        // 🔥 Procesar eventos correctamente
+        while (eventQueue.TryDequeue(out UnityEvent ev))
+        {
+            ev?.Invoke();
         }
     }
 
