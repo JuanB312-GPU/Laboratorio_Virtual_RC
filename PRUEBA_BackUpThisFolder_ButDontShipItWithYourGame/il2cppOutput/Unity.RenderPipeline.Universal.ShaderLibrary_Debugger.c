@@ -30,13 +30,13 @@ static const Il2CppMethodExecutionContextInfoIndex g_methodExecutionContextInfoI
 IL2CPP_EXTERN_C Il2CppSequencePoint g_sequencePointsUnity_RenderPipeline_Universal_ShaderLibrary[];
 Il2CppSequencePoint g_sequencePointsUnity_RenderPipeline_Universal_ShaderLibrary[7] = 
 {
-	{ 78266, 0, 0, 0, 0, 0, -1, kSequencePointKind_Normal, 0, 0 },
-	{ 78266, 0, 0, 0, 0, 0, 16777215, kSequencePointKind_Normal, 0, 1 },
-	{ 78266, 1, 46, 46, 9, 10, 0, kSequencePointKind_Normal, 0, 2 },
-	{ 78266, 1, 47, 53, 13, 15, 1, kSequencePointKind_Normal, 0, 3 },
-	{ 78266, 1, 47, 53, 13, 15, 27, kSequencePointKind_StepOut, 0, 4 },
-	{ 78266, 1, 47, 53, 13, 15, 55, kSequencePointKind_StepOut, 0, 5 },
-	{ 78266, 1, 54, 54, 9, 10, 93, kSequencePointKind_Normal, 0, 6 },
+	{ 79944, 0, 0, 0, 0, 0, -1, kSequencePointKind_Normal, 0, 0 },
+	{ 79944, 0, 0, 0, 0, 0, 16777215, kSequencePointKind_Normal, 0, 1 },
+	{ 79944, 1, 46, 46, 9, 10, 0, kSequencePointKind_Normal, 0, 2 },
+	{ 79944, 1, 47, 53, 13, 15, 1, kSequencePointKind_Normal, 0, 3 },
+	{ 79944, 1, 47, 53, 13, 15, 27, kSequencePointKind_StepOut, 0, 4 },
+	{ 79944, 1, 47, 53, 13, 15, 55, kSequencePointKind_StepOut, 0, 5 },
+	{ 79944, 1, 54, 54, 9, 10, 93, kSequencePointKind_Normal, 0, 6 },
 };
 #else
 extern Il2CppSequencePoint g_sequencePointsUnity_RenderPipeline_Universal_ShaderLibrary[];
@@ -58,7 +58,7 @@ static const Il2CppSequencePointSourceFile g_sequencePointSourceFiles[1] = { NUL
 #if IL2CPP_MONO_DEBUGGER
 static const Il2CppTypeSourceFilePair g_typeSourceFiles[1] = 
 {
-	{ 9310, 1 },
+	{ 9583, 1 },
 };
 #else
 static const Il2CppTypeSourceFilePair g_typeSourceFiles[1] = { { 0, 0 } };

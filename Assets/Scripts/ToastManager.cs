@@ -10,6 +10,11 @@ public class ToastManager : MonoBehaviour
     [Header("UI Reference")]
     public GameObject toastPanel;
     public Text toastText; // or TextMeshProUGUI if using TMP
+    [Header("Canvas a ocultar")]
+    [SerializeField] private Canvas targetCanvas;
+    [Header("Tiempo antes de ocultar")]
+    [SerializeField] private float hideDelay = 5f;
+
 
     [Header("Sound")]
     public AudioSource audioSource;
@@ -91,7 +96,7 @@ public class ToastManager : MonoBehaviour
         bool enable1 = false;
         bool enable2 = false;
 
-        switch(message)
+        switch (message)
         {
             case "A":
                 miToggleA.isOn = true;
@@ -110,23 +115,27 @@ public class ToastManager : MonoBehaviour
                 break;
             case "Movimiento":
                 miToggleM.isOn = true;
-                completeMessage = "Se ha realizado la accin de movimiento";
+                completeMessage = "Se ha realizado un movimiento con el objeto";
                 CheckTimer(1);
                 break;
-            case "Rotaci�n en X":
+            case "Giro en X":
                 miToggleRX.isOn = true;
-                completeMessage = "Se ha realizado la acci�n de rotaci�n en X";
+                completeMessage = "Se ha realizado un giro en X con el objeto";
                 CheckTimer(1);
                 break;
-            case "Rotacin en Y":
+            case "Giro en Y":
                 miToggleRY.isOn = true;
-                completeMessage = "Se ha realizado la accin de rotacin en Y";
+                completeMessage = "Se ha realizado un giro en Y con el objeto";
                 CheckTimer(1);
+                break;
+            case "Reset":
+                completeMessage = "El escenario ha sido reseteado";
+                resetTest();
                 break;
         }
 
         // Lógica de sonido para toggles de movimiento y rotación
-        if (message == "Movimiento" || message == "Rotación en X" || message == "Rotación en Y")
+        if (message == "Movimiento" || message == "Giro en X" || message == "Giro en Y")
         {
             enable1 = miToggleM.isOn && miToggleRX.isOn && miToggleRY.isOn;
             audioSource.clip = enable1 ? finalSound : successSound;
@@ -139,13 +148,31 @@ public class ToastManager : MonoBehaviour
             audioSource.clip = enable2 ? finalSound : successSound;
         }
 
-        // Se lanza el toast, y se activa el audio
+        // Verificar si TODAS las funciones están completas
+        bool allComplete = miToggleA.isOn && miToggleB.isOn && miToggleC.isOn
+                        && miToggleM.isOn && miToggleRX.isOn && miToggleRY.isOn;
+
         toastText.text = completeMessage;
         toastPanel.SetActive(true);
         audioSource.Play();
-        StartCoroutine(AnimateToast());
+
+        if (allComplete)
+        {
+            // Terminó todo — ocultar canvas después del delay
+            StartCoroutine(HideCanvasAfterDelay());
+        }
+        else
+        {
+            // Aún hay tareas pendientes — solo animar el toast
+            StartCoroutine(AnimateToast());
+        }
     }
 
+    private IEnumerator HideCanvasAfterDelay()
+    {
+        yield return new WaitForSeconds(hideDelay);
+        targetCanvas.gameObject.SetActive(false);
+    }
     private IEnumerator AnimateToast()
     {
         // Fade in
@@ -182,5 +209,18 @@ public class ToastManager : MonoBehaviour
         File.AppendAllText(path, line + "\n");
 
         Debug.Log("Guardado en: " + path);
+    }
+
+    private void resetTest()
+    {
+        miToggleA.isOn = false;
+        miToggleB.isOn = false;
+        miToggleC.isOn = false;
+        miToggleM.isOn = false;
+        miToggleRX.isOn = false;
+        miToggleRY.isOn = false;
+        timerRunning = false;
+        timerValue = 0f;
+        targetCanvas.gameObject.SetActive(true);
     }
 }
