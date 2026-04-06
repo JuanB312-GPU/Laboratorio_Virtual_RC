@@ -8,33 +8,139 @@ using System.Text.RegularExpressions;
 
 public class TelnetUI : MonoBehaviour
 {
-    public int maxOutputChars = 50000; 
+    public int maxOutputChars = 10000;
 
     public TelnetClient telnetClient;
     public TMP_Text outputText;
     public TMP_InputField inputField;
     public ScrollRect scrollRect;
-    private StringBuilder cliBuffer = new StringBuilder();
+
+    private StringBuilder cliBuffer   = new StringBuilder(); // texto crudo
+    private StringBuilder cleanBuffer = new StringBuilder(); // texto ya limpio
+
     public static System.Action<bool> OnCapsChanged;
     private bool capsActive = false;
 
-    void Start()
-    {
-        
-    }
+    // ✅ Regex precompilados — se crean una sola vez
+    private static readonly Regex RxCsi    = new Regex(@"\x1B\[[0-9;?]*[@-~]", RegexOptions.Compiled);
+    private static readonly Regex RxOsc    = new Regex(@"\x1B].[^\x1B]*\x07",  RegexOptions.Compiled);
+    private static readonly Regex RxEsc    = new Regex(@"\x1B.",               RegexOptions.Compiled);
+    private static readonly Regex RxCtrl   = new Regex(@"[\x00-\x08\x0B\x0C\x0E-\x1F]", RegexOptions.Compiled);
+    private static readonly Regex RxCc     = new Regex(@"[\p{Cc}&&[^\n\t]]",  RegexOptions.Compiled);
+    private static readonly Regex RxMultiN = new Regex(@"\n{3,}",              RegexOptions.Compiled);
 
-     void OnEnable()
+    // ✅ Control del loop de refresco
+    private bool _pendingUIUpdate = false;
+    public float uiRefreshRate = 0.05f; // máximo 20 refrescos por segundo
+
+    void Start() { }
+
+    void OnEnable()
     {
         telnetClient.OnDataReceived.AddListener(AppendOutput);
         inputField.onEndEdit.AddListener(OnInputEndEdit);
-        inputField.ActivateInputField(); // dar foco al abrir
-            
+        inputField.ActivateInputField();
+        StartCoroutine(UIRefreshLoop());
     }
 
     void OnDisable()
     {
         telnetClient.OnDataReceived.RemoveListener(AppendOutput);
         inputField.onEndEdit.RemoveListener(OnInputEndEdit);
+        StopAllCoroutines();
+    }
+
+    // ✅ Limpia solo el fragmento nuevo, no todo el buffer
+    public void AppendOutput(string text)
+    {
+        cliBuffer.Append(text);
+
+        string newClean = CleanTelnetText(text); // ← solo el texto nuevo
+        cleanBuffer.Append(newClean);
+
+        // Limitar tamaño de ambos buffers
+        if (cliBuffer.Length > maxOutputChars)
+        {
+            int excess = cliBuffer.Length - maxOutputChars;
+            cliBuffer.Remove(0, excess);
+
+            if (excess < cleanBuffer.Length)
+                cleanBuffer.Remove(0, excess);
+            else
+                cleanBuffer.Clear();
+        }
+
+        _pendingUIUpdate = true;
+    }
+
+    // ✅ Refresca la UI a 20fps máximo — cleanBuffer ya está listo, solo asigna
+    IEnumerator UIRefreshLoop()
+    {
+        var wait = new WaitForSeconds(uiRefreshRate);
+        while (true)
+        {
+            if (_pendingUIUpdate)
+            {
+                _pendingUIUpdate = false;
+                outputText.SetText(cleanBuffer); // ← SetText evita allocations extra de TMP
+
+                // Espera un frame para que el layout esté listo antes del scroll
+                yield return null;
+                scrollRect.verticalNormalizedPosition = 0f;
+            }
+            yield return wait;
+        }
+    }
+
+    string CleanTelnetText(string input)
+    {
+        if (string.IsNullOrEmpty(input)) return input;
+
+        // 1) Eliminar secuencias CSI/ANSI
+        input = RxCsi.Replace(input, string.Empty);
+        // 2) Eliminar OSC y secuencias ESC simples
+        input = RxOsc.Replace(input, string.Empty);
+        input = RxEsc.Replace(input, string.Empty);
+        // 3) Remover caracteres de control no imprimibles
+        input = RxCtrl.Replace(input, string.Empty);
+        input = RxCc.Replace(input, string.Empty);
+        // 4) Normalizar saltos de línea
+        input = input.Replace("\r\n", "\n").Replace("\r", "\n");
+        // 5) Colapsar múltiples saltos de línea
+        input = RxMultiN.Replace(input, "\n\n");
+
+        return input;
+    }
+
+    public void SendCommand(string rawCommand)
+    {
+        bool isPureEnter = rawCommand == "\r" || rawCommand == "\n" || rawCommand == "\r\n";
+        string command = isPureEnter ? "" : rawCommand.TrimEnd('\r', '\n');
+
+        // Limitar tamaño del buffer
+        if (cliBuffer.Length > maxOutputChars)
+        {
+            int excess = cliBuffer.Length - maxOutputChars;
+            cliBuffer.Remove(0, excess);
+
+            if (excess < cleanBuffer.Length)
+                cleanBuffer.Remove(0, excess);
+            else
+                cleanBuffer.Clear();
+        }
+
+        try
+        {
+            // IMPORTANTE: TelnetClient agregará CRLF
+            telnetClient?.Send(command);
+        }
+        catch (System.Exception ex)
+        {
+            AppendOutput($"[Telnet] Error enviando: {ex.Message}\n");
+        }
+
+        inputField.text = "";
+        inputField.ActivateInputField();
     }
 
     void OnInputEndEdit(string text)
@@ -46,97 +152,18 @@ public class TelnetUI : MonoBehaviour
         if (!enterPressed) return;
 
         if (string.IsNullOrEmpty(text))
-        {
-            // ENTER vacío → nueva línea + prompt
             SendCommand("\r");
-        }
         else
-        {
             SendCommand(text + "\r");
-        }
     }
 
-    string CleanTelnetText(string input)
-    {
-    if (string.IsNullOrEmpty(input)) return input;
-
-    // 1) Eliminar secuencias CSI/ANSI que empiezan con ESC '[' y terminan en una letra (ej: \x1b[0m, \x1b[2K)
-    // Explicación: \x1B = ESC, \[ = '[', [0-9;?]* = parámetros, [@-~] = finalizador de control
-    input = Regex.Replace(input, @"\x1B\[[0-9;?]*[@-~]", string.Empty);
-
-    // 2) Eliminar otras secuencias ESC comenzando por ESC + any-char (p. ej. OSC, BEL), opcional
-    input = Regex.Replace(input, @"\x1B].[^\x1B]*\x07", string.Empty); // OSC ... BEL
-    input = Regex.Replace(input, @"\x1B.", string.Empty); // secuencias simples con ESC
-
-    // 3) Remover caracteres de control no imprimibles (0x00 - 0x1F) excepto \r(13), \n(10), \t(9)
-    input = Regex.Replace(input, @"[\x00-\x08\x0B\x0C\x0E-\x1F]", string.Empty);
-    input = Regex.Replace(input, @"[\p{Cc}&&[^\n\t]]", string.Empty);
-    // 4) Normalizar saltos de línea Telnet (CRLF / CR / LF → LF)
-    input = input.Replace("\r\n", "\n");
-    input = input.Replace("\r", "\n");
-
-// 5) Colapsar múltiples saltos de línea en uno solo (opcional pero recomendado)
-input = Regex.Replace(input, @"\n{3,}", "\n\n");
-    return input;
-    }
-
-   public void AppendOutput(string text)
-    {
-
-    cliBuffer.Append(text);
-string clean = CleanTelnetText(cliBuffer.ToString());
-outputText.text = clean;
-
-    // Hacer scroll al final
-    Canvas.ForceUpdateCanvases();
-    scrollRect.verticalNormalizedPosition = 0f;
-    Canvas.ForceUpdateCanvases();
-    }
-
-    public void SendCommand(string rawCommand)
-{
-    bool isPureEnter = rawCommand == "\r" || rawCommand == "\n" || rawCommand == "\r\n";
-
-    string command;
-
-    if (isPureEnter) 
-    {
-        // ENTER real → no tocar
-        command = "";
-    }
-    else
-    {
-        // Texto normal → limpiar saltos accidentales
-        command = rawCommand.TrimEnd('\r', '\n');
-    }
-
-    // Limitar tamaño del buffer
-    if (cliBuffer.Length > maxOutputChars)
-    {
-        cliBuffer.Remove(0, cliBuffer.Length - maxOutputChars);
-    }
-
-    outputText.text = cliBuffer.ToString();
-
-    try
-    {
-        // IMPORTANTE: TelnetClient agregará CRLF
-        telnetClient?.Send(command);
-    }
-    catch (System.Exception ex)
-    {
-        cliBuffer.AppendLine($"[Telnet] Error enviando: {ex.Message}");
-        outputText.text = cliBuffer.ToString();
-    }
-
-    inputField.text = "";
-    inputField.ActivateInputField();
-}
     void Update()
     {
-    if (!inputField.isFocused)
-        inputField.ActivateInputField();
+        if (!inputField.isFocused)
+            inputField.ActivateInputField();
     }
+
+    // ── Teclado virtual (sin cambios) ──────────────────────────────────────
 
     public void VirtualKeyPress(string key)
     {
@@ -164,7 +191,7 @@ outputText.text = clean;
             case "espacio":
                 inputField.text += " ";
                 break;
-            
+
             case "←":
                 if (inputField.caretPosition > 0)
                     inputField.caretPosition--;
@@ -199,13 +226,12 @@ outputText.text = clean;
             case "9": return "(";
             case "0": return ")";
         }
-            return value.ToUpper();
-        
-
+        return value.ToUpper();
     }
 
     public void ClearOutput()
     {
         cliBuffer.Clear();
+        cleanBuffer.Clear();
     }
 }

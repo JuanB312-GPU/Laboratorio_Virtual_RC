@@ -66,7 +66,7 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "game::@d02bb112ea9f9c2ed29f",
-					"jsonFile" : "target-game-Debug-14761deb98a3e85750c9.json",
+					"jsonFile" : "target-game-Debug-a1fbae06d05e0f97cadd.json",
 					"name" : "game",
 					"projectIndex" : 1
 				}
@@ -77,7 +77,7 @@
 	"paths" : 
 	{
 		"build" : "D:/Laboratorio_Virtual_RC/.utmp/Debug/5y2m5b03/arm64-v8a",
-		"source" : "D:/Laboratorio_Virtual_RC/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp"
+		"source" : "D:/Laboratorio_Virtual_RC/Library/PramData/AndroidApplicationController/Cache/com.UnityTechnologies.com.unity.template.urpblank/gradle-project/unityLibrary/src/main/cpp"
 	},
 	"version" : 
 	{

@@ -11,7 +11,7 @@ public class TelnetClient : MonoBehaviour
 {
     [Header("Conexión")]
     public string host = "127.0.0.1"; // reemplaza por la IP de tu PC
-    public int port = 5000;
+    public int port = 5000; // reemplaza por el puerto de tu PC
 
     public TMP_Dropdown portDropdown;
 
@@ -38,7 +38,9 @@ public class TelnetClient : MonoBehaviour
     void Start()
     {
         // Start connection attempt
+        Debug.Log("Ruta: " + Application.persistentDataPath);
         portDropdown.onValueChanged.AddListener(OnPortChanged);
+        host = ConfigManager.Instance.Config.ip;
         Connect();
     }
 
@@ -60,24 +62,24 @@ public class TelnetClient : MonoBehaviour
 
     void OnPortChanged(int index)
     {
-        string selectedText = portDropdown.options[index].text;
-        switch (selectedText)
+        int selectedText = 0;
+        switch (portDropdown.options[index].text)
         {
             case "Router-1":
-                selectedText = "5000";
+                selectedText = ConfigManager.Instance.Config.puerto1;
                 break;
             case "PC1":
-                selectedText = "5003";
+                selectedText = ConfigManager.Instance.Config.puerto2;
                 break;
             case "PC2":
-                selectedText = "5002";
+                selectedText = ConfigManager.Instance.Config.puerto3;
                 break;
             case "PC3":
-                selectedText = "5006";
+                selectedText = ConfigManager.Instance.Config.puerto4;
                 break;
             // Agrega más casos según tus opciones
         }
-        int newPort = int.Parse(selectedText);
+        int newPort = selectedText;
 
         ChangePort(newPort);
     }

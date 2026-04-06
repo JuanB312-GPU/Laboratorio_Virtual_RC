@@ -20,6 +20,8 @@ public class ToastManager : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip successSound;
     public AudioClip finalSound;
+
+    public AudioClip resetSound;
     public Toggle miToggleA;
     public Toggle miToggleB;
     public Toggle miToggleC;
@@ -130,6 +132,7 @@ public class ToastManager : MonoBehaviour
                 break;
             case "Reset":
                 completeMessage = "El escenario ha sido reseteado";
+                audioSource.clip = resetSound;
                 resetTest();
                 break;
         }
