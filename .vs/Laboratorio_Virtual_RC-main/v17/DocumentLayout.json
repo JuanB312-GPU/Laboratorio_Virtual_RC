@@ -3,40 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\InteractableTracker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\InteractableTracker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\StepMarker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\StepMarker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\ToastManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\ToastManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\FirstTestController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\FirstTestController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\TelnetUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\TelnetUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\ButtonValueSetter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\ButtonValueSetter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Samples\\XR Interaction Toolkit\\3.2.2\\Starter Assets\\Scripts\\XRPokeFollowAffordance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Samples\\XR Interaction Toolkit\\3.2.2\\Starter Assets\\Scripts\\XRPokeFollowAffordance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\DeskPosition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\DeskPosition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Button\\Scripts\\TypingArea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Button\\Scripts\\TypingArea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\ManualCaret.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\ManualCaret.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,120 +14,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FirstTestController.cs",
-              "DocumentMoniker": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\FirstTestController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\FirstTestController.cs",
-              "ToolTip": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\FirstTestController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\FirstTestController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-11T18:04:10.484Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "StepMarker.cs",
-              "DocumentMoniker": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\StepMarker.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\StepMarker.cs",
-              "ToolTip": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\StepMarker.cs",
-              "RelativeToolTip": "Assets\\Scripts\\StepMarker.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-11T18:03:31.298Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "InteractableTracker.cs",
-              "DocumentMoniker": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\InteractableTracker.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\InteractableTracker.cs",
-              "ToolTip": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\InteractableTracker.cs",
-              "RelativeToolTip": "Assets\\Scripts\\InteractableTracker.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAAwDYAAAABAAAAAAAAAA==",
+              "Title": "ManualCaret.cs",
+              "DocumentMoniker": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\ManualCaret.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ManualCaret.cs",
+              "ToolTip": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\ManualCaret.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ManualCaret.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAEMAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-11T17:59:44.706Z",
+              "WhenOpened": "2026-04-10T20:42:17.641Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ToastManager.cs",
-              "DocumentMoniker": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\ToastManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\ToastManager.cs",
-              "ToolTip": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\ToastManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\ToastManager.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAADwvykAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-11T17:32:22.047Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TelnetUI.cs",
-              "DocumentMoniker": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\TelnetUI.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\TelnetUI.cs",
-              "ToolTip": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\TelnetUI.cs",
-              "RelativeToolTip": "Assets\\Scripts\\TelnetUI.cs",
-              "ViewState": "AgIAALAAAAAAAAAAAADwv74AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-09T16:55:26.826Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ButtonValueSetter.cs",
-              "DocumentMoniker": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\ButtonValueSetter.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\ButtonValueSetter.cs",
-              "ToolTip": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\ButtonValueSetter.cs",
-              "RelativeToolTip": "Assets\\Scripts\\ButtonValueSetter.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAAEkAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-05T21:02:09.553Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "XRPokeFollowAffordance.cs",
-              "DocumentMoniker": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Samples\\XR Interaction Toolkit\\3.2.2\\Starter Assets\\Scripts\\XRPokeFollowAffordance.cs",
-              "RelativeDocumentMoniker": "Assets\\Samples\\XR Interaction Toolkit\\3.2.2\\Starter Assets\\Scripts\\XRPokeFollowAffordance.cs",
-              "ToolTip": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Samples\\XR Interaction Toolkit\\3.2.2\\Starter Assets\\Scripts\\XRPokeFollowAffordance.cs",
-              "RelativeToolTip": "Assets\\Samples\\XR Interaction Toolkit\\3.2.2\\Starter Assets\\Scripts\\XRPokeFollowAffordance.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T18:18:25.443Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "TypingArea.cs",
-              "DocumentMoniker": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Button\\Scripts\\TypingArea.cs",
-              "RelativeDocumentMoniker": "Assets\\Button\\Scripts\\TypingArea.cs",
-              "ToolTip": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Button\\Scripts\\TypingArea.cs",
-              "RelativeToolTip": "Assets\\Button\\Scripts\\TypingArea.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T18:09:49.347Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "DeskPosition.cs",
-              "DocumentMoniker": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\DeskPosition.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\DeskPosition.cs",
-              "ToolTip": "C:\\Users\\REALIDAD AUMENTADA\\Downloads\\Laboratorio_Virtual_RC-main (1)\\Laboratorio_Virtual_RC-main\\Assets\\Scripts\\DeskPosition.cs",
-              "RelativeToolTip": "Assets\\Scripts\\DeskPosition.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAABYAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-13T19:12:19.421Z"
             }
           ]
         }
