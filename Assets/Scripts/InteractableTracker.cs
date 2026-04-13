@@ -46,17 +46,17 @@ public class InteractableTracker : MonoBehaviour
         if (maxScore == moveScore)
         {
             movementDone = true;
-            ToastManager.Instance.ShowToast("Movimiento");
+            InitialTestManager.Instance.ShowToast("Movimiento");
         }
         else if (maxScore == rotXScore)
         {
             rotateXDone = true;
-            ToastManager.Instance.ShowToast("Giro en X");
+            InitialTestManager.Instance.ShowToast("Giro en X");
         }
         else
         {
             rotateYDone = true;
-            ToastManager.Instance.ShowToast("Giro en Y");
+            InitialTestManager.Instance.ShowToast("Giro en Y");
         }
 
     }

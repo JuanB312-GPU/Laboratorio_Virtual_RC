@@ -3,13 +3,14 @@ using UnityEngine.UI;
 using System.Collections;
 using System.IO;
 
-public class ToastManager : MonoBehaviour
+public class InitialTestManager : MonoBehaviour
 {
-    public static ToastManager Instance;
+    public static InitialTestManager Instance;
 
     [Header("UI Reference")]
     public GameObject toastPanel;
     public GameObject DMarker;
+    public GameObject EMarker;
     public Text toastText; // or TextMeshProUGUI if using TMP
     [Header("Canvas a ocultar")]
     [SerializeField] private Canvas targetCanvas;
@@ -121,6 +122,10 @@ public class ToastManager : MonoBehaviour
                 completeMessage = "Continua con la prueba de acciones";
                 DMarker.SetActive(false);
                 break;
+            case "E":
+                completeMessage = "Continua con el test de cableado";
+                EMarker.SetActive(false);
+                break;
             case "Movimiento":
                 miToggleM.isOn = true;
                 completeMessage = "Se ha realizado un movimiento con el objeto";
@@ -150,6 +155,7 @@ public class ToastManager : MonoBehaviour
             audioSource.clip = enable1 ? finalSound : successSound;
             if (enable1)
                 completeMessage = "¡Ve al test de cableado!";
+            EMarker.SetActive(enable1);
         }
 
         // Lógica de sonido para toggles de puntos de control

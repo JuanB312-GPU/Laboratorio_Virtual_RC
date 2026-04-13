@@ -123,7 +123,7 @@ public class SnapToRack : MonoBehaviour
         slot.isOccupied = true;
         slot.Highlight(true);
         snappedSlot = slot;
-
+        WireTestManager.Instance.ShowToast(gameObject.name);
         rb.isKinematic = true;
         rb.useGravity = false;
         rb.linearVelocity = Vector3.zero;

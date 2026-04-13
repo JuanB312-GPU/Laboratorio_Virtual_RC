@@ -32,6 +32,6 @@ public class ResetManager : MonoBehaviour
                 markerObjects[i].SetActive(true); // Reactiva los marcadores
         }
 
-        ToastManager.Instance.ShowToast("Reset");
+        InitialTestManager.Instance.ShowToast("Reset");
     }
 }
