@@ -6,6 +6,8 @@ public class ResetManager : MonoBehaviour
 {
     [Header("Objetos a resetear")]
     [SerializeField] private Resettable[] resettableObjects;
+    [Header("Marcadores a resetear")]
+    [SerializeField] private GameObject[] markerObjects;
 
     [Header("Botón (opcional si lo asignas por Inspector)")]
     [SerializeField] private Button resetButton;
@@ -23,6 +25,11 @@ public class ResetManager : MonoBehaviour
         {
             if (obj != null)
                 obj.ResetState();
+        }
+        for (int i = 0; i < markerObjects.Length; i++)
+        {
+            if (markerObjects[i] != null)
+                markerObjects[i].SetActive(true); // Reactiva los marcadores
         }
 
         ToastManager.Instance.ShowToast("Reset");

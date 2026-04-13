@@ -13,6 +13,7 @@ public class StepMarker : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GetComponentInParent<FirstTestController>().HandleStepMarker(markerName);
+            gameObject.SetActive(false); // Desactiva el marcador para que no se active de nuevo
         }
     }
 

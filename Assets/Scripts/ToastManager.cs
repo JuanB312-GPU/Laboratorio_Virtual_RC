@@ -9,9 +9,11 @@ public class ToastManager : MonoBehaviour
 
     [Header("UI Reference")]
     public GameObject toastPanel;
+    public GameObject DMarker;
     public Text toastText; // or TextMeshProUGUI if using TMP
     [Header("Canvas a ocultar")]
     [SerializeField] private Canvas targetCanvas;
+    [SerializeField] private Canvas targetCanvas2;
     [Header("Tiempo antes de ocultar")]
     [SerializeField] private float hideDelay = 5f;
 
@@ -115,6 +117,10 @@ public class ToastManager : MonoBehaviour
                 completeMessage = "Se ha pasado por el marcador C";
                 CheckTimer(0);
                 break;
+            case "D":
+                completeMessage = "Continua con la prueba de acciones";
+                DMarker.SetActive(false);
+                break;
             case "Movimiento":
                 miToggleM.isOn = true;
                 completeMessage = "Se ha realizado un movimiento con el objeto";
@@ -142,6 +148,8 @@ public class ToastManager : MonoBehaviour
         {
             enable1 = miToggleM.isOn && miToggleRX.isOn && miToggleRY.isOn;
             audioSource.clip = enable1 ? finalSound : successSound;
+            if (enable1)
+                completeMessage = "¡Ve al test de cableado!";
         }
 
         // Lógica de sonido para toggles de puntos de control
@@ -149,6 +157,9 @@ public class ToastManager : MonoBehaviour
         {
             enable2 = miToggleA.isOn && miToggleB.isOn && miToggleC.isOn;
             audioSource.clip = enable2 ? finalSound : successSound;
+            if (enable2)
+                completeMessage = "¡Felicidades, ve al nuevo punto D!";
+            DMarker.SetActive(enable2);
         }
 
         // Verificar si TODAS las funciones están completas
@@ -158,16 +169,12 @@ public class ToastManager : MonoBehaviour
         toastText.text = completeMessage;
         toastPanel.SetActive(true);
         audioSource.Play();
+        StartCoroutine(AnimateToast());
 
         if (allComplete)
         {
             // Terminó todo — ocultar canvas después del delay
             StartCoroutine(HideCanvasAfterDelay());
-        }
-        else
-        {
-            // Aún hay tareas pendientes — solo animar el toast
-            StartCoroutine(AnimateToast());
         }
     }
 
@@ -175,6 +182,7 @@ public class ToastManager : MonoBehaviour
     {
         yield return new WaitForSeconds(hideDelay);
         targetCanvas.gameObject.SetActive(false);
+        targetCanvas2.gameObject.SetActive(true);
     }
     private IEnumerator AnimateToast()
     {

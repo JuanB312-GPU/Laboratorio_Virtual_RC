@@ -21,7 +21,6 @@ public class TelnetUI : MonoBehaviour
     public static System.Action<bool> OnCapsChanged;
     private bool capsActive = false;
 
-    // ✅ Regex precompilados — se crean una sola vez
     private static readonly Regex RxCsi    = new Regex(@"\x1B\[[0-9;?]*[@-~]", RegexOptions.Compiled);
     private static readonly Regex RxOsc    = new Regex(@"\x1B].[^\x1B]*\x07",  RegexOptions.Compiled);
     private static readonly Regex RxEsc    = new Regex(@"\x1B.",               RegexOptions.Compiled);
@@ -29,28 +28,44 @@ public class TelnetUI : MonoBehaviour
     private static readonly Regex RxCc     = new Regex(@"[\p{Cc}&&[^\n\t]]",  RegexOptions.Compiled);
     private static readonly Regex RxMultiN = new Regex(@"\n{3,}",              RegexOptions.Compiled);
 
-    // ✅ Control del loop de refresco
     private bool _pendingUIUpdate = false;
     public float uiRefreshRate = 0.05f; // máximo 20 refrescos por segundo
 
-    void Start() { }
+    void Start()
+    {
+        inputField.ActivateInputField();
+    }
 
     void OnEnable()
     {
         telnetClient.OnDataReceived.AddListener(AppendOutput);
-        inputField.onEndEdit.AddListener(OnInputEndEdit);
+        inputField.onSubmit.AddListener(OnSubmit);
         inputField.ActivateInputField();
         StartCoroutine(UIRefreshLoop());
+        StartCoroutine(MaintainFocus());
     }
 
     void OnDisable()
     {
         telnetClient.OnDataReceived.RemoveListener(AppendOutput);
-        inputField.onEndEdit.RemoveListener(OnInputEndEdit);
+        inputField.onSubmit.RemoveListener(OnSubmit);
         StopAllCoroutines();
     }
 
-    // ✅ Limpia solo el fragmento nuevo, no todo el buffer
+    IEnumerator MaintainFocus()
+{
+    while (true)
+    {
+        if (!inputField.isFocused)
+        {
+            yield return new WaitForSeconds(0.3f); // evita spam
+            inputField.ActivateInputField();
+            inputField.caretPosition = inputField.text.Length;
+        }
+        yield return null;
+    }
+}
+
     public void AppendOutput(string text)
     {
         cliBuffer.Append(text);
@@ -73,7 +88,6 @@ public class TelnetUI : MonoBehaviour
         _pendingUIUpdate = true;
     }
 
-    // ✅ Refresca la UI a 20fps máximo — cleanBuffer ya está listo, solo asigna
     IEnumerator UIRefreshLoop()
     {
         var wait = new WaitForSeconds(uiRefreshRate);
@@ -143,7 +157,7 @@ public class TelnetUI : MonoBehaviour
         inputField.ActivateInputField();
     }
 
-    void OnInputEndEdit(string text)
+    void OnSubmit(string text)
     {
         var kb = Keyboard.current;
         bool enterPressed = kb != null &&
@@ -156,14 +170,6 @@ public class TelnetUI : MonoBehaviour
         else
             SendCommand(text + "\r");
     }
-
-    void Update()
-    {
-        if (!inputField.isFocused)
-            inputField.ActivateInputField();
-    }
-
-    // ── Teclado virtual (sin cambios) ──────────────────────────────────────
 
     public void VirtualKeyPress(string key)
     {
