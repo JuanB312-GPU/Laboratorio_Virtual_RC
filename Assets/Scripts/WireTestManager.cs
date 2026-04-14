@@ -2,133 +2,164 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.IO;
-
+ 
 public class WireTestManager : MonoBehaviour
 {
     public static WireTestManager Instance;
-
-    [Header("UI Reference")]
-    public GameObject toastPanel; 
+ 
+    [Header("UI")]
+    public GameObject toastPanel;
     public GameObject FMarker;
-    public Text toastText; // or TextMeshProUGUI if using TMP
-    [Header("Canvas a ocultar")]
+    public Text toastText;
+ 
+    [Header("Canvas")]
     [SerializeField] private Canvas targetCanvas;
-    [Header("Tiempo antes de ocultar")]
     [SerializeField] private float hideDelay = 5f;
-
-
-    [Header("Sound")]
+ 
+    [Header("Sonido")]
     public AudioSource audioSource;
     public AudioClip successSound;
     public AudioClip finalSound;
-
     public AudioClip resetSound;
+ 
+    [Header("Toggles")]
     public Toggle miToggleCA;
     public Toggle miToggleCB;
     public Toggle miToggleW;
-
-    [Header("Settings")]
+ 
+    [Header("Ajustes")]
     public float duration = 3f;
     public float fadeSpeed = 1f;
-
+ 
     private CanvasGroup canvasGroup;
-
-    [Header("Timer")]
-    private float timerValue = 0f;
-    private bool timerRunning = false;
-
-    void Update()
-    {
-        if (timerRunning)
-            timerValue += Time.deltaTime;
-    }
-
-    private void CheckTimer()
-    {
-        bool timerEnable = false;
-
-        timerEnable = miToggleCA.isOn && miToggleCB.isOn && miToggleW.isOn;
-
-        if (!timerRunning && (miToggleCA.isOn || miToggleCB.isOn || miToggleW.isOn))
-        {
-             // Arranca cuando se activa el primero
-             timerValue = 0f;
-             timerRunning = true;
-             Debug.Log("Timer started");
-        }
-
-        if (timerRunning && timerEnable)
-        {
-            // Se detiene cuando los tres est�n activos
-            timerRunning = false;
-            Debug.Log("Timer stopped: " + timerValue.ToString("F2") + " seconds");
-            SaveTimerToFile(timerValue, 2);
-        }
-    }
-
+    private float timerValue;
+    private bool timerRunning;
+ 
+    // ── Ciclo de vida ──────────────────────────────────────────────
+ 
     void Awake()
     {
         Instance = this;
         canvasGroup = toastPanel.GetComponent<CanvasGroup>();
         toastPanel.SetActive(false);
     }
-
+ 
+    void Update()
+    {
+        if (timerRunning)
+            timerValue += Time.deltaTime;
+    }
+ 
+    // ── API pública ────────────────────────────────────────────────
+ 
     public void ShowToast(string message)
     {
         StopAllCoroutines();
-        string completeMessage = "";
-        bool enable1 = false;
-
+ 
+        string msg = HandleMessage(message);
+ 
+        toastText.text = msg;
+        toastPanel.SetActive(true);
+        audioSource.Play();
+        StartCoroutine(AnimateToast());
+ 
+        if (AllComplete())
+            StartCoroutine(HideCanvasAfterDelay());
+    }
+ 
+    public void ResetTest()
+    {
+        miToggleCA.isOn = false;
+        miToggleCB.isOn = false;
+        miToggleW.isOn = false;
+        timerRunning = false;
+        timerValue = 0f;
+        targetCanvas.gameObject.SetActive(false);
+    }
+ 
+    // ── Lógica interna ─────────────────────────────────────────────
+ 
+    /// <summary>Procesa el mensaje entrante, actualiza estado y devuelve el texto a mostrar.</summary>
+    private string HandleMessage(string message)
+    {
         switch (message)
         {
             case "Cube1":
                 miToggleCA.isOn = true;
-                completeMessage = "Se ha puesto el primer elemento en el rack";
                 CheckTimer();
-                break;
+                return ResolveRackMessage("Se ha puesto el primer elemento en el rack");
+ 
             case "Cube2":
                 miToggleCB.isOn = true;
-                completeMessage = "Se ha puesto el segundo elemento en el rack";
                 CheckTimer();
-                break;
-            case "Wire":
+                return ResolveRackMessage("Se ha puesto el segundo elemento en el rack");
+ 
+            case "RJ45":
                 miToggleW.isOn = true;
-                completeMessage = "Se ha hecho la conexi�n por consola";
                 CheckTimer();
-                break;
+                return ResolveRackMessage("Se ha conectado el cable a la consola");
+ 
             case "F":
                 FMarker.SetActive(false);
-                completeMessage = "Empieza el ejercicio con el CLI";
-                break;
-        }
-
-            enable1 = miToggleCA.isOn && miToggleCB.isOn && miToggleW.isOn;
-            audioSource.clip = enable1 ? finalSound : successSound;
-            if (enable1)
-                completeMessage = "�Ve al punto F de la consola!";
-            FMarker.SetActive(enable1);
-
-
-        // Verificar si TODAS las funciones est�n completas
-        bool allComplete = miToggleCA.isOn && miToggleCB.isOn && miToggleW.isOn;
-
-        toastText.text = completeMessage;
-        toastPanel.SetActive(true);
-        audioSource.Play();
-        StartCoroutine(AnimateToast());
-
-        if (allComplete)
-        {
-            // Termin� todo � ocultar canvas despu�s del delay
-            StartCoroutine(HideCanvasAfterDelay());
+                audioSource.clip = successSound;
+                return "Empieza el ejercicio con el CLI";
+ 
+            default:
+                Debug.LogWarning($"[WireTestManager] Mensaje desconocido: {message}");
+                return string.Empty;
         }
     }
-
+ 
+    /// <summary>Devuelve el mensaje correcto según si el rack está completo o no,
+    /// y actualiza el sonido y el marcador F.</summary>
+    private string ResolveRackMessage(string defaultMsg)
+    {
+        bool allDone = AllComplete();
+        audioSource.clip = allDone ? finalSound : successSound;
+        FMarker.SetActive(allDone);
+        return allDone ? "¡Ve al punto F de la consola!" : defaultMsg;
+    }
+ 
+    private bool AllComplete() =>
+        miToggleCA.isOn && miToggleCB.isOn && miToggleW.isOn;
+ 
+    /// <summary>Arranca el timer con el primer toggle activo; lo detiene cuando los tres lo están.</summary>
+    private void CheckTimer()
+    {
+        bool anyActive  = miToggleCA.isOn || miToggleCB.isOn || miToggleW.isOn;
+        bool allActive  = AllComplete();
+ 
+        if (!timerRunning && anyActive)
+        {
+            timerValue   = 0f;
+            timerRunning = true;
+            Debug.Log("[WireTestManager] Timer iniciado.");
+        }
+ 
+        if (timerRunning && allActive)
+        {
+            timerRunning = false;
+            Debug.Log($"[WireTestManager] Timer detenido: {timerValue:F2}s");
+            SaveTimerToFile(timerValue);
+        }
+    }
+ 
+    private void SaveTimerToFile(float timeValue)
+    {
+        string path = Application.persistentDataPath + "/tiempos.txt";
+        string line  = $"{System.DateTime.Now:yyyy-MM-dd HH:mm:ss} | Ejercicio de cableado | Tiempo: {timeValue:F2} segundos";
+        File.AppendAllText(path, line + "\n");
+        Debug.Log($"[WireTestManager] Guardado en: {path}");
+    }
+ 
+    // ── Corrutinas ─────────────────────────────────────────────────
+ 
     private IEnumerator HideCanvasAfterDelay()
     {
         yield return new WaitForSeconds(hideDelay);
         targetCanvas.gameObject.SetActive(false);
     }
+ 
     private IEnumerator AnimateToast()
     {
         // Fade in
@@ -138,42 +169,16 @@ public class WireTestManager : MonoBehaviour
             canvasGroup.alpha += Time.deltaTime * fadeSpeed;
             yield return null;
         }
-
-        // Wait
+ 
         yield return new WaitForSeconds(duration);
-
+ 
         // Fade out
         while (canvasGroup.alpha > 0f)
         {
             canvasGroup.alpha -= Time.deltaTime * fadeSpeed;
             yield return null;
         }
-
+ 
         toastPanel.SetActive(false);
-    }
-
-    // Funci�n para guardar los tiempos en un archivo de texto
-    void SaveTimerToFile(float timeValue, int caseValue)
-    {
-        string path = Application.persistentDataPath + "/tiempos.txt";
-
-        string tipo = "Ejercicio de cableado";
-        string line = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +
-                    " | " + tipo +
-                    " | Tiempo: " + timeValue.ToString("F2") + " segundos";
-
-        File.AppendAllText(path, line + "\n");
-
-        Debug.Log("Guardado en: " + path);
-    }
-
-    private void resetTest()
-    {
-        miToggleCA.isOn = false;
-        miToggleCB.isOn = false;
-        miToggleW.isOn = false;
-        timerRunning = false;
-        timerValue = 0f;
-        targetCanvas.gameObject.SetActive(false);
     }
 }

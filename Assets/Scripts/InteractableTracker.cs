@@ -30,7 +30,7 @@ public class InteractableTracker : MonoBehaviour
     {
         float distance     = Vector3.Distance(transform.position, lastPosition);
         Vector3 currentEuler = transform.eulerAngles;
-        float deltaX       = Mathf.Abs(Mathf.DeltaAngle(lastRotationEuler.x, currentEuler.x));
+        float deltaX       = Mathf.Abs(Mathf.DeltaAngle(lastRotationEuler.z, currentEuler.z));
         float deltaY       = Mathf.Abs(Mathf.DeltaAngle(lastRotationEuler.y, currentEuler.y));
 
         // Solo calcular scores de eventos que aún no se han completado

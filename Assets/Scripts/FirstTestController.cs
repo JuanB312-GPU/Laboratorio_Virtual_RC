@@ -16,7 +16,15 @@ public class FirstTestController : MonoBehaviour
 
     public void HandleStepMarker(string markerName)
     {
-        InitialTestManager.Instance.ShowToast(markerName);
+        if (markerName == "F")
+        {
+            WireTestManager.Instance.ShowToast(markerName);
+        }
+        else
+        {
+            InitialTestManager.Instance.ShowToast(markerName);
+        }
+        
         // Aquí va tu acción: sumar puntos, abrir puerta, etc.
     }
 }

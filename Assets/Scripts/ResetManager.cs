@@ -8,6 +8,7 @@ public class ResetManager : MonoBehaviour
     [SerializeField] private Resettable[] resettableObjects;
     [Header("Marcadores a resetear")]
     [SerializeField] private GameObject[] markerObjects;
+    [SerializeField] private GameObject[] hideMarkerObjects;
 
     [Header("Botón (opcional si lo asignas por Inspector)")]
     [SerializeField] private Button resetButton;
@@ -31,6 +32,12 @@ public class ResetManager : MonoBehaviour
             if (markerObjects[i] != null)
                 markerObjects[i].SetActive(true); // Reactiva los marcadores
         }
+        for (int i = 0; i < hideMarkerObjects.Length; i++)
+        {
+            if (hideMarkerObjects[i] != null)
+                hideMarkerObjects[i].SetActive(false); // Oculta los marcadores
+        }
+
 
         InitialTestManager.Instance.ShowToast("Reset");
     }
