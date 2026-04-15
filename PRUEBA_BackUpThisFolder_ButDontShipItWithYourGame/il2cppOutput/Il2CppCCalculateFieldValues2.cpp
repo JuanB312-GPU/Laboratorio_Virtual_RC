@@ -2743,13 +2743,13 @@ struct MoreInfo_tB58ABF2D5D75E92D35BBC37192CD0D5C02C3F0FA  : public RuntimeObjec
 	int32_t ___Hash;
 	String_t* ___RemoteUrl;
 };
-struct U3CAnimateToastU3Ed__28_tC0921871E4B4BC1AF81B503F697EF7775228D1FC  : public RuntimeObject
+struct U3CAnimateToastU3Ed__32_t082BC98089AA17CD3A1284608247E6601E15AADE  : public RuntimeObject
 {
 	int32_t ___U3CU3E1__state;
 	RuntimeObject* ___U3CU3E2__current;
 	WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25* ___U3CU3E4__this;
 };
-struct U3CHideCanvasAfterDelayU3Ed__27_t574AD957E0A11FADE1F1A505E973C5CFE95E0281  : public RuntimeObject
+struct U3CHideCanvasAfterDelayU3Ed__31_t376D91E08C602163D91E1E3EC146231BA0605930  : public RuntimeObject
 {
 	int32_t ___U3CU3E1__state;
 	RuntimeObject* ___U3CU3E2__current;
@@ -31878,6 +31878,10 @@ struct WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25  : public MonoB
 	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___toastPanel;
 	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___FMarker;
 	Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* ___toastText;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___CLIPanel;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___DevicesPanel;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___HelpPanel;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___Keyboard;
 	Canvas_t2DB4CEFDFF732884866C83F11ABF75F5AE8FFB26* ___targetCanvas;
 	float ___hideDelay;
 	AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* ___audioSource;
@@ -42150,13 +42154,13 @@ IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable8933[2] =
 	static_cast<int32_t>(offsetof(TerminalToggle_tCAA820E7AE10D19B322F63DF65CFBE97BB8A553F, ___terminalCanvas)),static_cast<int32_t>(offsetof(TerminalToggle_tCAA820E7AE10D19B322F63DF65CFBE97BB8A553F, ___toggleKey)),};
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable8935[3] = 
 {
-	static_cast<int32_t>(offsetof(U3CAnimateToastU3Ed__28_tC0921871E4B4BC1AF81B503F697EF7775228D1FC, ___U3CU3E1__state)),static_cast<int32_t>(offsetof(U3CAnimateToastU3Ed__28_tC0921871E4B4BC1AF81B503F697EF7775228D1FC, ___U3CU3E2__current)),static_cast<int32_t>(offsetof(U3CAnimateToastU3Ed__28_tC0921871E4B4BC1AF81B503F697EF7775228D1FC, ___U3CU3E4__this)),};
+	static_cast<int32_t>(offsetof(U3CAnimateToastU3Ed__32_t082BC98089AA17CD3A1284608247E6601E15AADE, ___U3CU3E1__state)),static_cast<int32_t>(offsetof(U3CAnimateToastU3Ed__32_t082BC98089AA17CD3A1284608247E6601E15AADE, ___U3CU3E2__current)),static_cast<int32_t>(offsetof(U3CAnimateToastU3Ed__32_t082BC98089AA17CD3A1284608247E6601E15AADE, ___U3CU3E4__this)),};
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable8936[3] = 
 {
-	static_cast<int32_t>(offsetof(U3CHideCanvasAfterDelayU3Ed__27_t574AD957E0A11FADE1F1A505E973C5CFE95E0281, ___U3CU3E1__state)),static_cast<int32_t>(offsetof(U3CHideCanvasAfterDelayU3Ed__27_t574AD957E0A11FADE1F1A505E973C5CFE95E0281, ___U3CU3E2__current)),static_cast<int32_t>(offsetof(U3CHideCanvasAfterDelayU3Ed__27_t574AD957E0A11FADE1F1A505E973C5CFE95E0281, ___U3CU3E4__this)),};
-IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable8937[18] = 
+	static_cast<int32_t>(offsetof(U3CHideCanvasAfterDelayU3Ed__31_t376D91E08C602163D91E1E3EC146231BA0605930, ___U3CU3E1__state)),static_cast<int32_t>(offsetof(U3CHideCanvasAfterDelayU3Ed__31_t376D91E08C602163D91E1E3EC146231BA0605930, ___U3CU3E2__current)),static_cast<int32_t>(offsetof(U3CHideCanvasAfterDelayU3Ed__31_t376D91E08C602163D91E1E3EC146231BA0605930, ___U3CU3E4__this)),};
+IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable8937[22] = 
 {
-	static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25_StaticFields, ___Instance)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___toastPanel)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___FMarker)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___toastText)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___targetCanvas)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___hideDelay)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___audioSource)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___successSound)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___finalSound)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___resetSound)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___miToggleCA)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___miToggleCB)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___miToggleW)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___duration)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___fadeSpeed)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___canvasGroup)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___timerValue)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___timerRunning)),};
+	static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25_StaticFields, ___Instance)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___toastPanel)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___FMarker)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___toastText)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___CLIPanel)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___DevicesPanel)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___HelpPanel)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___Keyboard)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___targetCanvas)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___hideDelay)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___audioSource)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___successSound)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___finalSound)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___resetSound)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___miToggleCA)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___miToggleCB)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___miToggleW)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___duration)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___fadeSpeed)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___canvasGroup)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___timerValue)),static_cast<int32_t>(offsetof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25, ___timerRunning)),};
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable8938[4] = 
 {
 	static_cast<int32_t>(offsetof(Section_t50C894D0A717C2368EBAAE5477D4E8626D0B5401, ___heading)),static_cast<int32_t>(offsetof(Section_t50C894D0A717C2368EBAAE5477D4E8626D0B5401, ___text)),static_cast<int32_t>(offsetof(Section_t50C894D0A717C2368EBAAE5477D4E8626D0B5401, ___linkText)),static_cast<int32_t>(offsetof(Section_t50C894D0A717C2368EBAAE5477D4E8626D0B5401, ___url)),};

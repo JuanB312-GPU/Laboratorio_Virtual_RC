@@ -5343,13 +5343,13 @@ struct MoreInfo_tB58ABF2D5D75E92D35BBC37192CD0D5C02C3F0FA  : public RuntimeObjec
 struct BindingsMarshaller_t83C2670C243D70DB012B2CA95F16AE91ACA39F5D  : public RuntimeObject
 {
 };
-struct U3CAnimateToastU3Ed__28_tC0921871E4B4BC1AF81B503F697EF7775228D1FC  : public RuntimeObject
+struct U3CAnimateToastU3Ed__32_t082BC98089AA17CD3A1284608247E6601E15AADE  : public RuntimeObject
 {
 	int32_t ___U3CU3E1__state;
 	RuntimeObject* ___U3CU3E2__current;
 	WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25* ___U3CU3E4__this;
 };
-struct U3CHideCanvasAfterDelayU3Ed__27_t574AD957E0A11FADE1F1A505E973C5CFE95E0281  : public RuntimeObject
+struct U3CHideCanvasAfterDelayU3Ed__31_t376D91E08C602163D91E1E3EC146231BA0605930  : public RuntimeObject
 {
 	int32_t ___U3CU3E1__state;
 	RuntimeObject* ___U3CU3E2__current;
@@ -46711,6 +46711,10 @@ struct WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25  : public MonoB
 	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___toastPanel;
 	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___FMarker;
 	Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* ___toastText;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___CLIPanel;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___DevicesPanel;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___HelpPanel;
+	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___Keyboard;
 	Canvas_t2DB4CEFDFF732884866C83F11ABF75F5AE8FFB26* ___targetCanvas;
 	float ___hideDelay;
 	AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* ___audioSource;
@@ -59832,9 +59836,9 @@ const Il2CppTypeDefinitionSizes g_typeDefinitionSize8933 = { sizeof(TerminalTogg
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes g_typeDefinitionSize8934;
 const Il2CppTypeDefinitionSizes g_typeDefinitionSize8934 = { sizeof(VRPerformance_tECC3BDCC55E7C171AF9F35E38A7CF15D1509DCEB), -1, 0, 0 };
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes g_typeDefinitionSize8935;
-const Il2CppTypeDefinitionSizes g_typeDefinitionSize8935 = { sizeof(U3CAnimateToastU3Ed__28_tC0921871E4B4BC1AF81B503F697EF7775228D1FC), -1, 0, 0 };
+const Il2CppTypeDefinitionSizes g_typeDefinitionSize8935 = { sizeof(U3CAnimateToastU3Ed__32_t082BC98089AA17CD3A1284608247E6601E15AADE), -1, 0, 0 };
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes g_typeDefinitionSize8936;
-const Il2CppTypeDefinitionSizes g_typeDefinitionSize8936 = { sizeof(U3CHideCanvasAfterDelayU3Ed__27_t574AD957E0A11FADE1F1A505E973C5CFE95E0281), -1, 0, 0 };
+const Il2CppTypeDefinitionSizes g_typeDefinitionSize8936 = { sizeof(U3CHideCanvasAfterDelayU3Ed__31_t376D91E08C602163D91E1E3EC146231BA0605930), -1, 0, 0 };
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes g_typeDefinitionSize8937;
 const Il2CppTypeDefinitionSizes g_typeDefinitionSize8937 = { sizeof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25), -1, sizeof(WireTestManager_t7156D298B6F53BBF098F954BB631BC3FCCB3BC25_StaticFields), 0 };
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes g_typeDefinitionSize8938;

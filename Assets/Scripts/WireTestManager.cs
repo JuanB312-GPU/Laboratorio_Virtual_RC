@@ -11,6 +11,12 @@ public class WireTestManager : MonoBehaviour
     public GameObject toastPanel;
     public GameObject FMarker;
     public Text toastText;
+
+    public GameObject CLIPanel;
+    public GameObject DevicesPanel;
+    public GameObject HelpPanel;
+
+    public GameObject Keyboard;
  
     [Header("Canvas")]
     [SerializeField] private Canvas targetCanvas;
@@ -73,6 +79,10 @@ public class WireTestManager : MonoBehaviour
         miToggleCB.isOn = false;
         miToggleW.isOn = false;
         timerRunning = false;
+        HelpPanel.SetActive(false);
+        CLIPanel.SetActive(false);
+        DevicesPanel.SetActive(false);
+        Keyboard.SetActive(false);
         timerValue = 0f;
         targetCanvas.gameObject.SetActive(false);
     }
@@ -102,6 +112,10 @@ public class WireTestManager : MonoBehaviour
             case "F":
                 FMarker.SetActive(false);
                 audioSource.clip = successSound;
+                HelpPanel.SetActive(true);
+                CLIPanel.SetActive(true);
+                DevicesPanel.SetActive(true);
+                Keyboard.SetActive(true);
                 return "Empieza el ejercicio con el CLI";
  
             default:
